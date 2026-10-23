@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MedChart — Email &amp; SMTP Setup Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <script src="../js/theme.js" defer></script>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 22px 16px 70px;
+        background: #eef2f7;
+        color: #253348;
+        font:
+          16px/1.65 Arial,
+          Helvetica,
+          sans-serif;
+      }
+      main {
+        max-width: 940px;
+        margin: auto;
+        background: #fff;
+        padding: clamp(18px, 4vw, 44px);
+        border-radius: 12px;
+        box-shadow: 0 6px 28px #182d4717;
+      }
+      h1 {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        line-height: 1.2;
+        margin: 0 0 10px;
+      }
+      h2 {
+        margin: 38px 0 12px;
+        font-size: 1.45rem;
+        border-bottom: 1px solid #d5deea;
+        padding-bottom: 9px;
+      }
+      h3 {
+        margin: 24px 0 7px;
+        font-size: 1.08rem;
+      }
+      p {
+        margin: 10px 0;
+      }
+      a {
+        color: #155da4;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #5599e7;
+        outline-offset: 3px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+      }
+      .back {
+        display: inline-block;
+        border: 1px solid #7d8da1;
+        border-radius: 7px;
+        padding: 8px 12px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .intro {
+        font-size: 1.08rem;
+      }
+      .note,
+      .warning,
+      .success {
+        padding: 14px 16px;
+        border: 2px solid;
+        border-radius: 8px;
+        margin: 17px 0;
+      }
+      .note {
+        background: #eaf2fd;
+        border-color: #6b9ed6;
+      }
+      .warning {
+        background: #fff4d8;
+        border-color: #d6a33a;
+      }
+      .success {
+        background: #e6f5eb;
+        border-color: #5ca876;
+      }
+      .steps {
+        padding-left: 26px;
+      }
+      .steps > li {
+        margin: 14px 0;
+      }
+      .steps > li::marker {
+        font-weight: bold;
+      }
+      .code {
+        position: relative;
+        margin: 12px 0 16px;
+        border: 1px solid #b8c6d7;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #152132;
+        color: #eaf3ff;
+      }
+      .code pre {
+        padding: 18px 16px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        margin: 0;
+        font:
+          14px/1.55 Consolas,
+          monospace;
+      }
+      .copy {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        border: 1px solid #8ca4c4;
+        border-radius: 5px;
+        background: #2e4564;
+        color: #fff;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .code pre {
+        padding-top: 46px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0 20px;
+      }
+      th,
+      td {
+        text-align: left;
+        border: 1px solid #c8d3df;
+        padding: 10px;
+        vertical-align: top;
+      }
+      th {
+        background: #e9eff7;
+      }
+      .toc {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin: 16px 0 28px;
+      }
+      .toc a {
+        padding: 6px 10px;
+        background: #edf3fa;
+        border: 1px solid #cad7e8;
+        border-radius: 6px;
+        text-decoration: none;
+      }
+      .small {
+        font-size: 0.92rem;
+        color: #536174;
+      }
+      code:not(pre code) {
+        background: #e7edf5;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      html[data-medchart-theme="dark"] body {
+        background: #151a22;
+        color: #edf1f7;
+      }
+      html[data-medchart-theme="dark"] main {
+        background: #202734;
+        color: #edf1f7;
+      }
+      html[data-medchart-theme="dark"] h2 {
+        border-color: #52647c;
+      }
+      html[data-medchart-theme="dark"] th {
+        background: #39475c;
+      }
+      html[data-medchart-theme="dark"] th,
+      html[data-medchart-theme="dark"] td {
+        border-color: #66778d;
+      }
+      html[data-medchart-theme="dark"] .note {
+        background: #203d5c;
+        border-color: #6b9ed6;
+      }
+      html[data-medchart-theme="dark"] .warning {
+        background: #514019;
+        border-color: #c69b32;
+      }
+      html[data-medchart-theme="dark"] .success {
+        background: #193e30;
+        border-color: #4ba77d;
+      }
+      html[data-medchart-theme="dark"] .toc a,
+      html[data-medchart-theme="dark"] code:not(pre code) {
+        background: #34465f;
+        color: #e7f2ff;
+        border-color: #647d9e;
+      }
+      html[data-medchart-theme="dark"] .small {
+        color: #bac7d8;
+      }
+      html[data-medchart-theme="dark"] .back {
+        border-color: #8195ae;
+      }
+      html[data-medchart-theme="dark"] .code {
+        background: #101824;
+        border-color: #65748a;
+      }
+      @media (max-width: 620px) {
+        body {
+          padding: 10px 8px 35px;
+        }
+        main {
+          padding: 18px 14px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 7px;
+        }
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #000 !important;
+        }
+        main {
+          box-shadow: none !important;
+          background: #fff !important;
+          color: #000 !important;
+        }
+        .copy,
+        .top,
+        .toc {
+          display: none !important;
+        }
+        .code {
+          background: #fff !important;
+          color: #000 !important;
+        }
+        .code pre {
+          padding: 10px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="top">
+        <a class="back" href="../admin/index.php">← Back to Administration</a
+        ><span class="small">MedChart Help • Email setup</span>
+      </div>
+      <h1>How to Set Up Email in MedChart</h1>
+      <p class="intro">
+        Don't worry if you've never set up email on a website before. This guide
+        walks you through it, one step at a time.
+      </p>
+      <p>
+        MedChart sends emails for password resets, password changes, new account
+        requests, and account approvals or denials. You only need
+        <strong>one</strong> email sending method.
+      </p>
+      <div class="note">
+        <strong>Start with PHP Mail.</strong> It's the easiest choice if your
+        web host already supports it. SMTP is optional, and you can switch back
+        at any time.
+      </div>
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#php-mail">PHP Mail</a><a href="#smtp">SMTP Setup</a
+        ><a href="#mailpit">Testing with Mailpit</a
+        ><a href="#troubleshooting">Troubleshooting</a
+        ><a href="#security">Keeping settings safe</a>
+      </nav>
+      <h2 id="php-mail">Option 1 — PHP Mail (easiest)</h2>
+      <p>
+        PHP Mail asks your hosting server to send the message. You don't have to
+        enter a separate email server or password, provided your hosting company
+        allows PHP mail delivery.
+      </p>
+      <ol class="steps">
+        <li>
+          Open your MedChart files using your hosting File Manager or FTP
+          program.
+        </li>
+        <li>
+          Find <code>secret/mail.php</code> and open it in a plain-text editor.
+        </li>
+        <li>Look for the <code>method</code> setting. It should say:</li>
+      </ol>
+      <div class="code">
+        <button class="copy" type="button" aria-label="Copy PHP Mail setting">
+          Copy
+        </button>
+        <pre><code>'method' => 'mail',</code></pre>
+      </div>
+      <ol class="steps" start="4">
+        <li>Save the file if you made a change.</li>
+        <li>
+          Log in to MedChart as an administrator. Open
+          <strong>Administration → Administrator Notifications</strong>.
+        </li>
+        <li>
+          Enter your administrator email address and click
+          <strong>Save Email</strong>. Then click
+          <strong>Send Test Email</strong>.
+        </li>
+        <li>Check that inbox, including the Spam or Junk folder.</li>
+      </ol>
+      <div class="success">
+        <strong>Did the email arrive?</strong> You're done. There is no need to
+        configure SMTP.
+      </div>
+      <p>
+        If nothing arrives, ask your hosting company whether your account
+        supports PHP's <code>mail()</code> function. You can also try SMTP
+        below.
+      </p>
+      <h2 id="smtp">Option 2 — SMTP (optional)</h2>
+      <p>
+        SMTP means that MedChart connects to an email server to send your
+        messages. Your hosting company or email provider supplies the settings.
+      </p>
+      <h3>Step 1 — Find your email server details</h3>
+      <p>
+        Look in your hosting control panel under
+        <strong>Email Accounts</strong>, <strong>Connect Devices</strong>, or
+        <strong>Mail Client Settings</strong>. If you can't find them, ask your
+        provider for its <em>outgoing SMTP settings</em>.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>What to enter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SMTP host</td>
+            <td>Server address, such as <code>mail.example.com</code></td>
+          </tr>
+          <tr>
+            <td>Port</td>
+            <td>
+              Usually <code>587</code> or <code>465</code>; use what your
+              provider specifies
+            </td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td>
+              <code>starttls</code> (commonly port 587) or
+              <code>ssl</code> (commonly port 465)
+            </td>
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td>Often your full email address</td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td>
+              Email account password or a special app password supplied by your
+              provider
+            </td>
+          </tr>
+          <tr>
+            <td>From email</td>
+            <td>The sender address authorized by your email provider</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Step 2 — Open the settings file</h3>
+      <p>
+        Open <code>secret/mail.php</code>. Change
+        <code>'method' => 'mail'</code> to <code>'method' => 'smtp'</code>.
+      </p>
+      <h3>Step 3 — Enter the settings</h3>
+      <p>
+        Here is an <strong>example only</strong>. Replace every example value
+        with your provider's actual details. Keep the quotes and commas.
+      </p>
+      <div class="code">
+        <button class="copy" type="button" aria-label="Copy SMTP example">
+          Copy
+        </button>
+        <pre><code>'method'     => 'smtp',
+'from_email' => 'medchart@example.com',
+'from_name'  => 'MedChart',
+'host'       => 'mail.example.com',
+'port'       => 587,
+'security'   => 'starttls',
+'username'   => 'medchart@example.com',
+'password'   => 'YOUR_EMAIL_PASSWORD',</code></pre>
+      </div>
+      <div class="warning">
+        <strong
+          >Don't copy these example values and expect them to work.</strong
+        >
+        <code>example.com</code> is not your email server. Also, never publish
+        your real SMTP password in a forum post or public repository.
+      </div>
+      <h3>Step 4 — Save and test</h3>
+      <p>
+        Save <code>secret/mail.php</code>, return to MedChart Administration,
+        save the administrator email address, and click
+        <strong>Send Test Email</strong>. Check your inbox and Spam/Junk folder.
+      </p>
+      <h3>Which port and security setting?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Port</th>
+            <th>Usually paired with</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>587</td>
+            <td><code>starttls</code> — encrypted after connecting</td>
+          </tr>
+          <tr>
+            <td>465</td>
+            <td><code>ssl</code> — encrypted from the beginning</td>
+          </tr>
+          <tr>
+            <td>1025</td>
+            <td><code>none</code> — local Mailpit testing only</td>
+          </tr>
+          <tr>
+            <td>25</td>
+            <td>
+              Often blocked; avoid unless your provider specifically instructs
+              you to use it
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <strong>Gmail note:</strong> A normal Gmail password generally won't
+        work with older basic SMTP authentication. Some eligible Google accounts
+        can use an app password; others require OAuth2. This MedChart SMTP
+        implementation does not support OAuth2, so Gmail may not be suitable for
+        your setup.
+      </div>
+      <h2 id="mailpit">Testing locally on Windows with Mailpit</h2>
+      <p>
+        Mailpit is a free local email catcher. It lets you test MedChart without
+        sending real emails to anyone.
+      </p>
+      <ol class="steps">
+        <li>
+          Start <code>mailpit.exe</code> on your computer. Leave its window
+          running.
+        </li>
+        <li>
+          Open
+          <a
+            href="http://localhost:8025"
+            target="_blank"
+            rel="noopener noreferrer"
+            >http://localhost:8025</a
+          >
+          to view your test inbox.
+        </li>
+        <li>Open <code>secret/mail.php</code> and use these settings:</li>
+      </ol>
+      <div class="code">
+        <button class="copy" type="button" aria-label="Copy Mailpit settings">
+          Copy
+        </button>
+        <pre><code>'method'     => 'smtp',
+'from_email' => 'medchart@localhost.test',
+'from_name'  => 'MedChart',
+'host'       => '127.0.0.1',
+'port'       => 1025,
+'security'   => 'none',
+'username'   => '',
+'password'   => '',</code></pre>
+      </div>
+      <ol class="steps" start="4">
+        <li>
+          Save the file. Open
+          <strong>Administration → Administrator Notifications</strong> in
+          MedChart.
+        </li>
+        <li>
+          Save an administrator email address and click
+          <strong>Send Test Email</strong>.
+        </li>
+        <li>Check the Mailpit inbox. You should see the message appear.</li>
+      </ol>
+      <div class="warning">
+        <strong>Important:</strong> The <code>none</code> security option is for
+        local testing with Mailpit, not for sending real email over the
+        internet. The SMTP implementation refuses passwords over an unencrypted
+        connection.
+      </div>
+      <h2 id="troubleshooting">If your test email doesn't arrive</h2>
+      <ul>
+        <li>
+          <strong>PHP Mail:</strong> Check Spam/Junk, then ask your web host if
+          PHP <code>mail()</code> is enabled.
+        </li>
+        <li>
+          <strong>SMTP:</strong> Double-check the host, port, security setting,
+          username, and password. Even one wrong character can stop delivery.
+        </li>
+        <li>
+          <strong>Port 465:</strong> Use <code>ssl</code>, not
+          <code>starttls</code>, unless your provider tells you otherwise.
+        </li>
+        <li><strong>Port 587:</strong> Usually use <code>starttls</code>.</li>
+        <li>
+          <strong>Mailpit:</strong> Confirm Mailpit is running and that port
+          1025 is available.
+        </li>
+        <li>
+          <strong>Sender rejected:</strong> Use a
+          <code>from_email</code> address your provider allows.
+        </li>
+        <li>
+          <strong>Still stuck?</strong> Ask your hosting provider: “What are the
+          outgoing SMTP settings for my email account, and do you allow
+          authenticated SMTP connections from PHP websites?”
+        </li>
+      </ul>
+      <p>
+        Remember: a successful send means the mail server accepted the message;
+        it does not guarantee that a real recipient will receive it.
+      </p>
+      <h2 id="security">Keep your email settings private</h2>
+      <p>
+        The <code>secret/mail.php</code> file can contain your SMTP password.
+        Keep it in MedChart's protected <code>secret</code> directory, and do
+        not share it or upload it to a public GitHub repository. Your website
+        should use HTTPS when deployed publicly.
+      </p>
+      <p class="small">
+        You can always switch back to PHP Mail by setting
+        <code>'method' => 'mail'</code>. No database changes are needed to
+        switch between the two delivery methods.
+      </p>
+      <div class="top" style="margin-top: 30px">
+        <a class="back" href="../admin/index.php">← Return to Administration</a>
+      </div>
+    </main>
+    <script>
+      document.querySelectorAll(".copy").forEach(function (button) {
+        button.addEventListener("click", async function () {
+          const value = button.parentElement.querySelector("code").textContent;
+          try {
+            await navigator.clipboard.writeText(value);
+            button.textContent = "Copied!";
+          } catch (e) {
+            const r = document.createRange();
+            r.selectNodeContents(button.parentElement.querySelector("code"));
+            const s = window.getSelection();
+            s.removeAllRanges();
+            s.addRange(r);
+            button.textContent = "Select and copy";
+          }
+          setTimeout(function () {
+            button.textContent = "Copy";
+          }, 2200);
+        });
+      });
+    </script>
+  </body>
+</html>

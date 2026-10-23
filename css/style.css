@@ -1,0 +1,611 @@
+/* Add viewport meta tag if not already present in your HTML head */
+/*
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+*/
+
+/* --- Body Wrap --- */
+.bodywrap {
+    width: 95%;
+    /* Slightly wider on mobile */
+    min-width: 300px;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 10px;
+    /* Add more padding */
+    font-family: Arial, sans-serif;
+    /* Use a standard, readable font */
+}
+
+/* --- Section Headers and Labels --- */
+h1,
+h2 {
+    margin-top: 10px;
+    /* Reduce top margin slightly */
+    margin-bottom: 10px;
+    /* Add bottom margin */
+    font-size: 1.4em;
+    /* Make main header larger */
+}
+
+h2 {
+    font-size: 1.2em;
+    /* Make section headers larger */
+}
+
+label {
+    font-size: 1em;
+    /* Make labels readable */
+    display: inline-block;
+    /* Ensure labels behave predictably */
+    margin-bottom: 5px;
+    /* Add space below label */
+}
+
+/* --- Input Fields and Buttons (General) --- */
+input[type="text"],
+input[type="date"],
+input[type="password"],
+textarea,
+button {
+    font-size: 1em;
+    /* Ensure text is readable */
+    padding: 10px;
+    /* Increase padding for larger touch targets */
+    margin: 5px 0;
+    /* Add vertical spacing */
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    border: 1px solid #ccc;
+    /* Standard border */
+    border-radius: 4px;
+    /* Slightly rounded corners */
+}
+
+/* --- Textarea Specific --- */
+#notes {
+    width: 100%;
+    /* Full width */
+    min-height: 150px;
+    /* Taller default height for easier editing */
+    resize: vertical;
+    /* Allow user to resize vertically if needed */
+}
+
+/* --- Grid Header Adjustments (Make Larger, Stack on Mobile) --- */
+.med-grid-header,
+.team-grid-header,
+.allergy-grid-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr auto;
+    /* Default for med/team */
+    padding: 10px 5px;
+    /* Increase vertical padding */
+    border: 1px solid #222;
+    background: #ddd;
+    font-weight: bold;
+    font-size: 1em;
+    /* Larger, readable text */
+    align-items: center;
+    /* Vertically center content */
+}
+
+/* Specific header widths */
+.med-grid-header,
+.team-grid-header {
+    grid-template-columns: 2fr 1fr 2fr auto;
+}
+
+.team-grid-header {
+    grid-template-columns: 2fr 1fr auto;
+}
+
+.allergy-grid-header {
+    grid-template-columns: 1fr auto;
+}
+
+/* --- Item Row Adjustments (Make Larger, Stack on Mobile) --- */
+.med-row,
+.team-row,
+.allergy-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr auto;
+    /* Default for med/team */
+    padding: 5px;
+    /* Increase vertical padding */
+    border: 1px solid #222;
+    background: #f8f8f8;
+    font-size: 1em;
+    /* Larger, readable text */
+    align-items: center;
+    /* Vertically center content */
+    margin-bottom: 4px;
+    /* Add space between rows */
+}
+
+/* Specific row widths */
+.med-row,
+.team-row {
+    grid-template-columns: 2fr 1fr 2fr auto;
+}
+
+.team-row {
+    grid-template-columns: 2fr 1fr auto;
+}
+
+.allergy-row {
+    grid-template-columns: 1fr auto;
+}
+
+.med-row,
+.team-row {
+    cursor: move;
+    /* Indicate draggability */
+}
+
+/* --- Sortable Container --- */
+.sortable {
+    touch-action: none;
+    /* Crucial for touch interactions */
+    user-select: none;
+    /* Prevent text selection while dragging */
+    min-height: 30px;
+    /* Ensure a larger minimum area for dragging */
+    padding: 5px 0;
+    /* Add internal padding */
+}
+
+.sortable .sortable-ghost {
+    opacity: 0.5;
+    transform: scale(1.02);
+}
+
+.sortable .sortable-chosen {
+    border: 2px dashed #007bff;
+    /* Use a more distinct color */
+    background-color: #e6f0ff;
+    /* Light highlight for chosen item */
+    outline: 2px solid #007bff;
+    /* Additional visual cue */
+}
+
+.sortable .sortable-drag {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    /* Slightly stronger shadow */
+    z-index: 1000;
+    background-color: white;
+}
+
+/* --- Input Group Layout (Stack on Mobile) --- */
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+    gap: 8px;
+    /* Increase gap slightly */
+    align-items: center;
+    /* Align items vertically */
+    margin-bottom: 15px;
+    /* Increase space below group */
+    width: 100%;
+    /* Ensure full width */
+}
+
+.input-group input[type="text"],
+.input-group input[type="date"] {
+    flex: 1;
+    /* Take available space */
+    min-width: 120px;
+    /* Increase minimum width */
+    /* Inherits padding, font-size, etc. from general input styles */
+}
+
+.input-group button {
+    /* Inherits padding, font-size, etc. from general button styles */
+    white-space: nowrap;
+    /* Prevent button text from wrapping unnecessarily */
+}
+
+/* --- Responsive Breakpoints (Crucial for Mobile Readability) --- */
+
+/* Adjust for medium screens (Tablets, larger phones in portrait) */
+@media (max-width: 768px) {
+
+    /* Increase base font size slightly */
+    body {
+        font-size: 16px;
+        /* A good baseline for mobile readability */
+    }
+
+    /* Stack grid headers and rows */
+    .med-grid-header,
+    .team-grid-header {
+        grid-template-columns: 1fr;
+        /* Stack Name, Dose, Freq, Actions vertically */
+        text-align: center;
+        /* Center text in header cells when stacked */
+    }
+
+    /* Hide the 'Actions' label text in header when stacked if it gets too cramped */
+    .med-grid-header> :last-child,
+    .team-grid-header> :last-child,
+    .allergy-grid-header> :last-child {
+        font-size: 0.9em;
+        /* Slightly smaller action text */
+    }
+
+    .med-row,
+    .team-row {
+        grid-template-columns: 1fr;
+        /* Stack Name, Dose, Freq, Actions vertically */
+        text-align: center;
+        /* Center text in row cells when stacked */
+    }
+
+    /* Ensure action buttons are prominent when stacked */
+    .med-row> :last-child,
+    .team-row> :last-child,
+    .allergy-row> :last-child {
+        justify-self: center;
+        /* Center the action buttons */
+        margin-top: 5px;
+        /* Add space above action buttons */
+    }
+
+    /* Stack input groups */
+    .input-group {
+        flex-direction: column;
+        /* Stack inputs and button vertically */
+        align-items: stretch;
+        /* Stretch inputs to full width */
+    }
+
+    .input-group>input,
+    .input-group>button {
+        margin: 4px 0;
+        /* Add space between stacked items */
+    }
+
+    /* Adjust main header sizes */
+    h1 {
+        font-size: 1.6em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    /* Adjust label size */
+    label {
+        font-size: 1.1em;
+    }
+}
+
+/* Adjust for very narrow screens (Small phones) */
+@media (max-width: 480px) {
+    .bodywrap {
+        width: 98%;
+        /* Nearly full width */
+        padding: 8px;
+        /* Slightly less padding */
+    }
+
+    /* Further increase font sizes if needed, though 16px base is usually sufficient */
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    label,
+    input[type="text"],
+    input[type="date"],
+    input[type="password"],
+    textarea,
+    button,
+    .med-grid-header,
+    .team-grid-header,
+    .allergy-grid-header,
+    .med-row,
+    .team-row,
+    .allergy-row {
+        font-size: 1em;
+        /* Ensure they don't get smaller than the base */
+    }
+
+    /* Potentially reduce padding further if space is extremely tight */
+    .med-grid-header,
+    .team-grid-header,
+    .allergy-grid-header,
+    .med-row,
+    .team-row,
+    .allergy-row {
+        padding: 8px 4px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="password"],
+    textarea,
+    button {
+        padding: 8px;
+        /* Slightly smaller padding on very small screens */
+    }
+}
+
+/* === Mobile Scroll Helper === */
+#mobile-scroll-helper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 44px;
+    /* Wide enough for thumb, narrow enough to stay out of the way */
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    /* Hidden by default, shown via media query */
+    touch-action: pan-y;
+    /* Allows vertical scrolling, blocks horizontal/gestures */
+    cursor: grab;
+    user-select: none;
+    pointer-events: auto;
+    /* Prevent drag events from bubbling to Sortable */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Subtle knurling pattern using CSS gradient */
+/* === Mobile Scroll Helper === */
+#mobile-scroll-helper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+    /* Knurling pattern */
+    background:
+        repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0px, rgba(0, 0, 0, 0.6) 2px, transparent 2px, transparent 4px),
+        linear-gradient(to right, rgba(150, 150, 150, 0.4), transparent 80%) !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+#mobile-scroll-helper:active {
+    cursor: grabbing;
+    background-color: rgba(100, 149, 237, 0.15);
+}
+
+/* Show on mobile/tablet */
+@media (max-width: 768px) {
+    #mobile-scroll-helper {
+        display: block;
+    }
+
+    /* Prevent body from going under the helper */
+    .bodywrap {
+        padding-right: 40px !important;
+        box-sizing: border-box;
+    }
+
+    /* Prevent horizontal scroll */
+    body,
+    html {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+}
+
+/* Compact six-dot drag handle. Only the handle starts sorting. */
+.med-row,
+.team-row,
+.allergy-row {
+    cursor: default;
+    min-width: 0;
+}
+
+.med-row {
+    grid-template-columns: 30px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 2fr) auto;
+    column-gap: 8px;
+}
+
+.team-row {
+    grid-template-columns: 30px minmax(0, 2fr) minmax(0, 1fr) auto;
+    column-gap: 8px;
+}
+
+.allergy-row {
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    column-gap: 8px;
+}
+
+.drag-handle {
+    box-sizing: border-box;
+    width: 34px;
+    height: 100%;
+    min-width: 30px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background: #eee;
+    color: #444;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.drag-handle .grip-dots {
+    display: block;
+    width: 16px;
+    height: 22px;
+    font-weight: 900;
+    fill: currentColor;
+    pointer-events: none;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+    background: #d2e5fb;
+}
+
+.drag-handle:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+}
+
+.sortable {
+    touch-action: pan-y;
+}
+
+@media (max-width: 768px) {
+
+    /* Let the handle span the full height of the stacked content without stretching the first value. */
+    .med-row,
+    .team-row,
+    .allergy-row {
+        grid-template-columns: 30px minmax(0, 1fr);
+        column-gap: 10px;
+        row-gap: 5px;
+        text-align: left;
+        align-items: start;
+    }
+
+    .med-row>.drag-handle,
+    .team-row>.drag-handle,
+    .allergy-row>.drag-handle {
+        grid-column: 1;
+        align-self: stretch;
+        height: 100%;
+        min-height: 30px;
+    }
+
+    /* Explicit row spans: 1 / -1 does not span implicitly created rows. */
+    .med-row {
+        grid-template-rows: repeat(4, auto);
+    }
+
+    .team-row {
+        grid-template-rows: repeat(3, auto);
+    }
+
+    .allergy-row {
+        grid-template-rows: repeat(2, auto);
+    }
+
+    .med-row>.drag-handle {
+        grid-row: 1 / span 4;
+    }
+
+    .team-row>.drag-handle {
+        grid-row: 1 / span 3;
+    }
+
+    .allergy-row>.drag-handle {
+        grid-row: 1 / span 2;
+    }
+
+    .med-row> :not(.drag-handle),
+    .team-row> :not(.drag-handle),
+    .allergy-row> :not(.drag-handle) {
+        grid-column: 2;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .med-row> :last-child,
+    .team-row> :last-child,
+    .allergy-row> :last-child {
+        justify-self: start;
+        margin-top: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+/* Keep medication content spaced slightly away from its drag grip. */
+.med-row > div:not(.drag-handle) {
+    padding-left: 5px;
+}
+
+/* Administration page navigation */
+.admin-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 20px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f3f6fa;
+}
+.admin-nav .admin-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #64748b;
+    border-radius: 5px;
+    background: #e2e8f0;
+    color: #172b42;
+    text-decoration: none;
+    font: 600 14px Arial, sans-serif;
+    line-height: 1.25;
+    min-height: 42px;
+    box-sizing: border-box;
+}
+.admin-nav .admin-nav-btn:hover,
+.admin-nav .admin-nav-btn:focus-visible { background: #cbd5e1; }
+.admin-nav .admin-nav-btn svg { width: 17px; height: 17px; flex: none; }
+.admin-nav .admin-nav-logout { background: transparent; }
+html[data-medchart-theme="dark"] .admin-nav {
+    background: #202b39;
+    border-color: #64748b;
+}
+html[data-medchart-theme="dark"] .admin-nav .admin-nav-btn {
+    background: #34465f;
+    border-color: #6d8099;
+    color: #f3f6fb;
+}
+html[data-medchart-theme="dark"] .admin-nav .admin-nav-logout { background: transparent; }
+html[data-medchart-theme="dark"] .admin-nav .admin-nav-btn:hover,
+html[data-medchart-theme="dark"] .admin-nav .admin-nav-btn:focus-visible { background: #435c7c; }
+@media (max-width: 420px) {
+    .admin-nav .admin-nav-btn { flex: 1 1 auto; }
+}
+
+/* Admin settings and create-user forms: consistent responsive field sizing. */
+.admin-panel .admin-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0;
+}
+.admin-panel .admin-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.admin-panel .admin-field label { font-weight: 600; }
+.admin-panel .admin-field > input { display: block; width: 100%; min-width: 0; max-width: none; box-sizing: border-box; }
+.admin-panel .admin-field-full { grid-column: 1 / -1; }
+.admin-panel .admin-form-actions { grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.admin-panel .admin-form-actions button { min-width: 110px; margin: 0; }
+.admin-panel .admin-check { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+.admin-panel .admin-check input { margin: 0; }
+.admin-feedback { border-radius: 6px; margin: 12px 0; }
+@media (max-width: 650px) {
+    .admin-panel .admin-form { grid-template-columns: 1fr; }
+}

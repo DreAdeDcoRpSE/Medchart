@@ -1,0 +1,30 @@
+<?php
+require_once __DIR__ . '/../includes/security.php';
+require_once '../includes/db.php';
+$user_id = med_require_user($conn);
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') med_require_csrf();
+require_once '../includes/functions.php';
+require_once '../secret/secret.php';
+
+$stmt = $conn->prepare('SELECT * FROM medical_team WHERE user_id = ? ORDER BY sort_order ASC');
+$stmt->bind_param('i', $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    // Decrypt fields
+    $row['name'] = decryptData($row['name']);
+    $row['phone'] = decryptData($row['phone']);
+
+    $id = (int)$row['id'];
+    $payload = htmlspecialchars(json_encode($row, JSON_INVALID_UTF8_SUBSTITUTE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+    echo "<div class='team-row' data-id='{$id}'>
+<button type='button' class='drag-handle' aria-label='Drag to reorder' title='Drag to reorder'><svg class='grip-dots' viewBox='0 0 16 24' width='16' height='22' aria-hidden='true' focusable='false'><circle cx='4' cy='4' r='2'/><circle cx='12' cy='4' r='2'/><circle cx='4' cy='12' r='2'/><circle cx='12' cy='12' r='2'/><circle cx='4' cy='20' r='2'/><circle cx='12' cy='20' r='2'/></svg></button>";
+    echo "<div>" . htmlspecialchars($row['name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</div>";
+    echo "<div>" . htmlspecialchars($row['phone'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</div>";
+    echo "<div>
+        <button data-team='$payload' onclick='editTeam(JSON.parse(this.dataset.team))'>Edit</button>
+        <button onclick='deleteTeamMember({$id})'>Delete</button>
+    </div>";
+echo "</div>";
+}

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>Whoa There! | Access Denied</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --green: #a5fa73;
+        --ink: #10191a;
+        --muted: #b8c7c4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        overflow-x: hidden;
+        background: radial-gradient(
+          ellipse at 50% 15%,
+          #243c36 0%,
+          #111b1d 48%,
+          #0a1012 100%
+        );
+        color: #f6f9f5;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        padding: 30px 16px;
+      }
+      .stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.28;
+        background-image: radial-gradient(#bafca6 1px, transparent 1px);
+        background-size: 41px 41px;
+        mask-image: linear-gradient(#000, transparent 75%);
+      }
+      main {
+        position: relative;
+        width: min(100%, 670px);
+        text-align: center;
+        border: 1px solid #4b7460;
+        border-radius: 28px;
+        background: linear-gradient(155deg, #1b2a29ee, #10191cee);
+        box-shadow:
+          0 30px 95px #0009,
+          0 0 80px #6fe68812;
+        padding: 38px clamp(18px, 5vw, 55px) 34px;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: 1px solid #5d956c;
+        border-radius: 12px;
+        color: #c2f6b0;
+        padding: 8px 14px;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+      }
+      .dot {
+        height: 12px;
+        width: 12px;
+        background: var(--green);
+        border-radius: 50%;
+        box-shadow: 0 0 12px var(--green);
+      }
+      h1 {
+        font-size: clamp(2.2rem, 7vw, 4.2rem);
+        letter-spacing: -0.06em;
+        line-height: 1.08;
+        margin: 16px 0 14px;
+      }
+      h1 span {
+        color: var(--green);
+      }
+      .lead {
+        font-size: 1.13rem;
+        color: #e3ebe6;
+        line-height: 1.6;
+        margin: 0 auto 10px;
+        max-width: 510px;
+      }
+      .sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 500px;
+        margin: 0 auto 20px;
+      }
+      .zombie {
+        width: 220px;
+        height: 206px;
+        margin: 5px auto 10px;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        filter: drop-shadow(0 15px 15px #0008);
+        animation: bob 3.4s ease-in-out infinite;
+      }
+      .head {
+        position: absolute;
+        width: 142px;
+        height: 146px;
+        top: 28px;
+        left: 39px;
+        border-radius: 48% 49% 45% 44%;
+        background: linear-gradient(135deg, #a7e18b, #71ad74 60%, #3d7d65);
+        border: 5px solid #294f45;
+        transform: rotate(-5deg);
+        transition: transform 0.25s;
+      }
+      .hair {
+        position: absolute;
+        left: 65px;
+        top: 17px;
+        width: 94px;
+        height: 41px;
+        background: #293b34;
+        border-radius: 55% 60% 20% 20%;
+        transform: rotate(-8deg);
+        clip-path: polygon(
+          0 30%,
+          15% 0,
+          35% 22%,
+          55% 0,
+          78% 24%,
+          100% 15%,
+          92% 100%,
+          12% 100%
+        );
+      }
+      .ear {
+        position: absolute;
+        width: 30px;
+        height: 42px;
+        background: #7ab47b;
+        border: 4px solid #294f45;
+        border-radius: 50%;
+        top: 90px;
+      }
+      .ear.left {
+        left: 25px;
+      }
+      .ear.right {
+        right: 25px;
+      }
+      .eye {
+        position: absolute;
+        top: 82px;
+        width: 39px;
+        height: 46px;
+        background: #f8fff0;
+        border: 4px solid #294f45;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .eye.left {
+        left: 66px;
+      }
+      .eye.right {
+        left: 117px;
+      }
+      .pupil {
+        position: absolute;
+        width: 14px;
+        height: 17px;
+        background: #243f37;
+        border-radius: 50%;
+        left: 10px;
+        top: 12px;
+        transition: transform 0.08s;
+      }
+      .nose {
+        position: absolute;
+        left: 106px;
+        top: 126px;
+        width: 10px;
+        height: 10px;
+        background: #4a8062;
+        border-radius: 50%;
+      }
+      .mouth {
+        position: absolute;
+        top: 145px;
+        left: 85px;
+        width: 56px;
+        height: 23px;
+        background: #283c35;
+        border: 4px solid #294f45;
+        border-radius: 5px 5px 35px 35px;
+        overflow: hidden;
+      }
+      .tooth {
+        display: inline-block;
+        background: #fff7df;
+        width: 10px;
+        height: 11px;
+        margin-left: 5px;
+        border-radius: 0 0 4px 4px;
+      }
+      .shirt {
+        position: absolute;
+        bottom: 0;
+        left: 50px;
+        width: 122px;
+        height: 53px;
+        background: #6c678f;
+        border: 5px solid #36364c;
+        border-radius: 50% 50% 8px 8px;
+      }
+      .arm {
+        position: absolute;
+        top: 152px;
+        width: 58px;
+        height: 24px;
+        border-radius: 30px;
+        background: #80b87b;
+        border: 4px solid #294f45;
+      }
+      .arm.left {
+        left: 9px;
+        transform: rotate(24deg);
+      }
+      .arm.right {
+        right: 9px;
+        transform: rotate(-24deg);
+      }
+      .zombie.wave .arm.right {
+        animation: wave 0.45s ease-in-out 3;
+        transform-origin: left center;
+      }
+      .zombie.wave .head {
+        transform: rotate(6deg);
+      }
+      @keyframes wave {
+        50% {
+          transform: rotate(-58deg);
+        }
+      }
+      @keyframes bob {
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      .speech {
+        display: inline-block;
+        min-height: 45px;
+        background: #293e38;
+        border: 1px solid #578b69;
+        border-radius: 15px;
+        padding: 12px 18px;
+        color: #d5f8cb;
+        font-weight: 700;
+        max-width: 100%;
+        margin: 3px 0 24px;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      button,
+      a.btn {
+        appearance: none;
+        border-radius: 12px;
+        border: 1px solid #6ba07b;
+        padding: 13px 21px;
+        font-size: 0.95rem;
+        font-weight: 800;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          transform 0.15s,
+          background 0.15s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 165px;
+      }
+      button:hover,
+      a.btn:hover {
+        transform: translateY(-2px);
+      }
+      button:focus-visible,
+      a.btn:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 3px;
+      }
+      .primary {
+        background: var(--green);
+        color: #14241a;
+        border-color: var(--green);
+      }
+      .secondary {
+        background: #263b36;
+        color: #e6f8e5;
+      }
+      footer {
+        margin-top: 24px;
+        color: #849e96;
+        font-size: 1rem;
+        letter-spacing: 0.03em;
+      }
+      .reduced * {
+        animation: none !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+    <main>
+      <div class="pill"><span class="dot"></span> RESTRICTED AREA</div>
+      <div
+        class="zombie"
+        id="zombie"
+        role="img"
+        aria-label="A friendly cartoon zombie security guard"
+        title="Click the zombie!"
+      >
+        <div class="shirt"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="head"></div>
+        <div class="hair"></div>
+        <div class="eye left"><div class="pupil"></div></div>
+        <div class="eye right"><div class="pupil"></div></div>
+        <div class="nose"></div>
+        <div class="mouth">
+          <span class="tooth"></span><span class="tooth"></span>
+        </div>
+      </div>
+      <h1>Whoa there, <span>human!</span></h1>
+      <p class="lead">
+        This is the admin area. Our zombie security guard says you're not on the
+        guest list.
+      </p>
+      <p class="sub">
+        Nothing personal. He doesn't even let his own left arm in without
+        permission. And it keeps falling off.
+      </p>
+      <div class="speech" id="speech" aria-live="polite">
+        🧟 “Brains? No. Admin access? Also no.”
+      </div>
+      <div class="buttons">
+        <button class="primary" id="joke" type="button">
+          🧠 Ask the Zombie</button
+        ><button class="secondary" id="back" type="button">
+          ↩ Take Me Back
+        </button>
+      </div>
+      <footer>
+        ACCESS DENIED · PROTECTED ADMIN AREA · NO BRAINS WERE HARMED
+      </footer>
+    </main>
+    <script>
+      (() => {
+        "use strict";
+        const lines = [
+          "🧟 “Brains? No. Admin access? Also no.”",
+          "🧟 “Sorry, the admin keys are buried somewhere.”",
+          "🧟 “I checked the list. You’re not on it. Neither am I.”",
+          "🧟 “I would let you in, but I misplaced my brain.”",
+          "🧟 “This door is locked tighter than my jaw.”",
+          "🧟 “I asked the boss. He just groaned. That means no.”",
+          "🧟 “Try the front door. It has fewer zombies.”",
+          "🧟 “Permission denied. Friendship approved.”",
+          "🧟 “The password is… wait, what were we talking about?”",
+        ];
+        let index = 0;
+        const speech = document.getElementById("speech"),
+          zombie = document.getElementById("zombie");
+        function talk() {
+          index = (index + 1) % lines.length;
+          speech.textContent = lines[index];
+          zombie.classList.remove("wave");
+          void zombie.offsetWidth;
+          zombie.classList.add("wave");
+        }
+        document.getElementById("joke").addEventListener("click", talk);
+        zombie.addEventListener("click", talk);
+        document.getElementById("back").addEventListener("click", () => {
+          if (history.length > 1) {
+            history.back();
+          } else {
+            location.assign("/");
+          }
+        });
+        document.addEventListener("pointermove", (e) => {
+          const rect = zombie.getBoundingClientRect(),
+            dx = Math.max(
+              -6,
+              Math.min(6, (e.clientX - (rect.left + rect.width / 2)) / 30),
+            ),
+            dy = Math.max(-5, Math.min(5, (e.clientY - (rect.top + 95)) / 35));
+          document
+            .querySelectorAll(".pupil")
+            .forEach((p) => (p.style.transform = `translate(${dx}px,${dy}px)`));
+        });
+      })();
+    </script>
+  </body>
+</html>

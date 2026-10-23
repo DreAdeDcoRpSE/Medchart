@@ -1,0 +1,87 @@
+/* SCREEN ONLY. print.php deliberately does not load this stylesheet. */
+.medchart-theme-control {display:flex;align-items:center;justify-content:flex-end;gap:9px;margin:0 0 14px;font:600 14px Arial,sans-serif;}
+.medchart-theme-control label {margin:0;}
+.medchart-theme-control select {font:inherit;min-height:38px;padding:5px 10px;border:1px solid #9ca3af;border-radius:6px;background:#fff;color:#222;cursor:pointer;}
+.medchart-theme-control select:focus-visible {outline:3px solid #66a9f5;outline-offset:2px;}
+html[data-medchart-theme="dark"] {color-scheme:dark;background:#151a22;color:#edf1f7;}
+html[data-medchart-theme="dark"] body {background:#151a22!important;color:#edf1f7!important;}
+html[data-medchart-theme="dark"] .bodywrap,
+html[data-medchart-theme="dark"] .login-container,
+html[data-medchart-theme="dark"] main {background:#202734!important;color:#edf1f7!important;}
+html[data-medchart-theme="dark"] h1,html[data-medchart-theme="dark"] h2,html[data-medchart-theme="dark"] h3,
+html[data-medchart-theme="dark"] label,html[data-medchart-theme="dark"] strong {color:#f3f6fb;}
+html[data-medchart-theme="dark"] a {color:#93c5fd;}
+html[data-medchart-theme="dark"] input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+html[data-medchart-theme="dark"] textarea,html[data-medchart-theme="dark"] select {background:#121923!important;color:#f3f6fb!important;border-color:#65748a!important;}
+html[data-medchart-theme="dark"] input::placeholder,html[data-medchart-theme="dark"] textarea::placeholder {color:#b1bdce;opacity:1;}
+html[data-medchart-theme="dark"] button:not(.med-pw-toggle),html[data-medchart-theme="dark"] input[type="submit"] {background:#34465f;color:#fff;border-color:#6d8099;}
+html[data-medchart-theme="dark"] button:not(.med-pw-toggle):hover {background:#435c7c;}
+html[data-medchart-theme="dark"] .med-pw-toggle {background:#34465f!important;color:#fff;border-color:#6d8099!important;}
+html[data-medchart-theme="dark"] .med-grid-header,html[data-medchart-theme="dark"] .team-grid-header,html[data-medchart-theme="dark"] .allergy-grid-header {background:#39475c;color:#fff;border-color:#66778d;}
+html[data-medchart-theme="dark"] .med-row,html[data-medchart-theme="dark"] .team-row,html[data-medchart-theme="dark"] .allergy-row {background:#273343;color:#edf1f7;border-color:#66778d;}
+html[data-medchart-theme="dark"] .med-row:nth-child(even),html[data-medchart-theme="dark"] .team-row:nth-child(even),html[data-medchart-theme="dark"] .allergy-row:nth-child(even) {background:#303e50;}
+html[data-medchart-theme="dark"] .drag-handle {background:#3d5069;color:#fff;border-color:#8294ac;}
+html[data-medchart-theme="dark"] section {background:#293444;color:#edf1f7;}
+html[data-medchart-theme="dark"] table {color:#edf1f7;}
+html[data-medchart-theme="dark"] td,html[data-medchart-theme="dark"] th {border-color:#66778d;}
+html[data-medchart-theme="dark"] .notice,
+html[data-medchart-theme="dark"] .med-warning,
+html[data-medchart-theme="dark"] [role="alert"] {background:#514019!important;color:#ffe7a0!important;border-color:#c69b32!important;}
+html[data-medchart-theme="dark"] .med-warning strong,html[data-medchart-theme="dark"] [role="alert"] strong {color:#ffe7a0!important;}
+html[data-medchart-theme="dark"] [role="status"] {background:#193e30!important;color:#d8fbe8!important;border-color:#4ba77d!important;}
+html[data-medchart-theme="dark"] [role="status"] strong,html[data-medchart-theme="dark"] [role="status"] h2 {color:#d8fbe8!important;}
+/* Even browser-printing a screen page must never print the dark palette. */
+@media print {
+  .medchart-theme-control {display:none!important;}
+  html[data-medchart-theme="dark"] {color-scheme:light!important;background:#fff!important;color:#000!important;}
+  html[data-medchart-theme="dark"] body,html[data-medchart-theme="dark"] .bodywrap,html[data-medchart-theme="dark"] .login-container,html[data-medchart-theme="dark"] main {background:#fff!important;color:#000!important;}
+  html[data-medchart-theme="dark"] h1,html[data-medchart-theme="dark"] h2,html[data-medchart-theme="dark"] h3,html[data-medchart-theme="dark"] label,html[data-medchart-theme="dark"] strong {color:#000!important;}
+  html[data-medchart-theme="dark"] .med-row,html[data-medchart-theme="dark"] .team-row,html[data-medchart-theme="dark"] .allergy-row {background:#f8f8f8!important;color:#000!important;border-color:#222!important;}
+  html[data-medchart-theme="dark"] .med-grid-header,html[data-medchart-theme="dark"] .team-grid-header,html[data-medchart-theme="dark"] .allergy-grid-header {background:#ddd!important;color:#000!important;border-color:#222!important;}
+}
+
+/* ==================================================
+   DARK MODE - INPUT AND AUTOFILL BACKGROUND COLORS
+   ================================================== */
+html[data-medchart-theme="light"] { color-scheme: light; }
+
+html[data-medchart-theme="dark"] input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+html[data-medchart-theme="dark"] textarea,
+html[data-medchart-theme="dark"] select {
+    background-color: #121923 !important;
+    color: #f3f6fb !important;
+    border-color: #65748a !important;
+    color-scheme: dark;
+}
+
+html[data-medchart-theme="dark"] input:autofill,
+html[data-medchart-theme="dark"] input:-webkit-autofill,
+html[data-medchart-theme="dark"] input:-webkit-autofill:hover,
+html[data-medchart-theme="dark"] input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #121923 inset !important;
+    box-shadow: 0 0 0 1000px #121923 inset !important;
+    -webkit-text-fill-color: #f3f6fb !important;
+    color: #f3f6fb !important;
+    caret-color: #f3f6fb !important;
+    transition: background-color 9999s ease-out 0s;
+}
+
+@supports (-moz-appearance: none) {
+    html[data-medchart-theme="dark"] input:autofill {
+        background-color: #121923 !important;
+        box-shadow: 0 0 0 1000px #121923 inset !important;
+        color: #f3f6fb !important;
+        caret-color: #f3f6fb !important;
+        filter: none !important;
+    }
+}
+
+/* Clearly visible status messages on account/security forms. */
+.med-notice { padding: 14px 16px; margin: 16px 0; border: 2px solid; border-radius: 8px; line-height: 1.5; }
+.med-notice strong { display: block; margin-bottom: 4px; }
+.med-notice-success { background: #e7f5e9; border-color: #4b9d62; color: #164c2b; }
+.med-notice-warning { background: #fff3cd; border-color: #d4a32b; color: #594000; }
+.med-notice-error { background: #fce8e8; border-color: #d16b6b; color: #742222; }
+html[data-medchart-theme="dark"] .med-notice-success { background: #153b2a; border-color: #63b981; color: #dcf9e6; }
+html[data-medchart-theme="dark"] .med-notice-warning { background: #443714; border-color: #e5b94b; color: #fff0b9; }
+html[data-medchart-theme="dark"] .med-notice-error { background: #482325; border-color: #e88b8b; color: #ffe2e2; }

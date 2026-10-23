@@ -1,0 +1,15 @@
+# MedChart Apache protection (works with WAMP and Apache shared hosting).
+# Do not enable forced HTTPS on local HTTP/WAMP.
+Options -Indexes
+
+# Hide backups, configuration exports, environment files and logs.
+<FilesMatch "(?i)(^\.env($|\.)|^\.git|^\.ht|\.(?:bak|backup|old|orig|save|swp|swo|sql|sqlite|db|log|ini|conf|yml|yaml|dist|patch|diff)$)">
+    Require all denied
+</FilesMatch>
+
+# Production HTTPS redirect: enable ONLY after SSL works on your public domain.
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+#     RewriteCond %{HTTPS} !=on
+#     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
+# </IfModule>
