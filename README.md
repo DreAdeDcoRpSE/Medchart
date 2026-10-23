@@ -34,37 +34,73 @@ These are placeholder paths. Put your images in a `screenshots/` folder in the G
 
 The main page for viewing and managing your medical information.
 
-![MedChart dashboard](screenshots/dashboard.png)
+<a href="https://github.com/user-attachments/assets/44b9fdc9-6dea-4594-a28a-c5192fd29b23">
+  <img
+    src="https://github.com/user-attachments/assets/44b9fdc9-6dea-4594-a28a-c5192fd29b23"
+    alt="MedChart Dashboard"
+    width="500"
+  >
+</a>
 
 ### Medications in action
 
 Activate or deactivate medications and rearrange their order using drag-and-drop.
 
-![MedChart medication management demonstration](screenshots/medications-demo.gif)
+<a href="https://github.com/user-attachments/assets/b733d4da-b5c7-4a3d-9560-2af39c80f8f5">
+  <img
+    src="https://github.com/user-attachments/assets/b733d4da-b5c7-4a3d-9560-2af39c80f8f5"
+    alt="MedChart medication management demonstration"
+    width="500"
+  >
+</a>
 
 ### Mobile view
 
 The responsive layout makes it possible to use MedChart on smaller screens.
 
-![MedChart mobile dashboard](screenshots/mobile.png)
+<a href="https://github.com/user-attachments/assets/3e700fb9-2263-4df2-b3d9-7cf6bbbd3a69">
+  <img
+    src="https://github.com/user-attachments/assets/3e700fb9-2263-4df2-b3d9-7cf6bbbd3a69"
+    alt="MedChart Mobile view"
+    height="500"
+  >
+</a>
 
 ### Encrypted Import and Export
 
 Move your medical information between compatible MedChart installations using password-protected transfer files.
 
-![MedChart Import and Export page](screenshots/import-export.png)
+<a href="https://github.com/user-attachments/assets/51a79ebe-60d8-4b8b-8978-36e048cd51d4">
+  <img
+    src="https://github.com/user-attachments/assets/51a79ebe-60d8-4b8b-8978-36e048cd51d4"
+    alt="MedChart Import and Export page"
+    height="500"
+  >
+</a>
 
 ### Admin Control Panel
 
 Manage user accounts and application administration from the ACP.
 
-![MedChart Admin Control Panel](screenshots/admin.png)
+<a href="https://github.com/user-attachments/assets/ac9eb053-58ab-4edc-ad41-7c9bee43cb15">
+  <img
+    src="https://github.com/user-attachments/assets/ac9eb053-58ab-4edc-ad41-7c9bee43cb15"
+    alt="MedChart Admin Control Panel"
+    height="500"
+  >
+</a>
 
 ### Printer-friendly page
 
 A clean, printable summary you can take to an appointment or save as a PDF.
 
-![MedChart printer-friendly medical summary](screenshots/print.png)
+<a href="https://github.com/user-attachments/assets/f7a8b7a6-42c3-4f4a-889b-b225dccb0150">
+  <img
+    src="https://github.com/user-attachments/assets/f7a8b7a6-42c3-4f4a-889b-b225dccb0150"
+    alt="MedChart printer-friendly medical summary"
+    height="500"
+  >
+</a>
 
 ## Features
 
