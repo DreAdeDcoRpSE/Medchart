@@ -85,3 +85,32 @@ html[data-medchart-theme="dark"] input:-webkit-autofill:focus {
 html[data-medchart-theme="dark"] .med-notice-success { background: #153b2a; border-color: #63b981; color: #dcf9e6; }
 html[data-medchart-theme="dark"] .med-notice-warning { background: #443714; border-color: #e5b94b; color: #fff0b9; }
 html[data-medchart-theme="dark"] .med-notice-error { background: #482325; border-color: #e88b8b; color: #ffe2e2; }
+
+/* Optional support link, shown at the bottom of the main dashboard. */
+.medchart-support-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin: 28px 0 8px;
+    padding: 17px 10px 6px;
+    border-top: 1px solid #c9d4dc;
+    color: #566573;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.medchart-donate-link {
+    color: #006e73;
+    font-weight: 700;
+    text-decoration: none;
+}
+.medchart-donate-link:hover,
+.medchart-donate-link:focus-visible { color: #004d51; text-decoration: underline; }
+html[data-medchart-theme="dark"] .medchart-support-footer {
+    border-top-color: #435365;
+    color: #bdc9d5;
+}
+html[data-medchart-theme="dark"] .medchart-donate-link { color: #54d9d0; }
+html[data-medchart-theme="dark"] .medchart-donate-link:hover,
+html[data-medchart-theme="dark"] .medchart-donate-link:focus-visible { color: #9af2ea; }
