@@ -114,6 +114,11 @@ if ($result && $result->num_rows > 0) {
         <button onclick="saveAll()">Save</button>
         <button onclick="window.open('print.php', '_blank')">Printer Friendly Version</button>
 
+        <footer class="medchart-support-footer">
+            <span>Enjoying MedChart? Support its development if you'd like.</span>
+            <a class="medchart-donate-link" href="https://www.paypal.com/donate/?hosted_button_id=PTAZ2DD7CTDVG" target="_blank" rel="noopener noreferrer" title="Opens PayPal in a new tab">🍺 Buy Me a Beer</a>
+        </footer>
+
         <script src="js/script.js"></script>
         <script src="js/Sortable.min.js"></script>
     </div>
