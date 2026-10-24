@@ -204,6 +204,18 @@ The web version is the first completed version of MedChart. A future goal is a s
 
 This is a plan, not a promise of a release date.
 
+
+## ❤️ Support MedChart
+
+MedChart is a free project that I develop and maintain in my spare time.
+
+If you find MedChart useful and would like to support its continued development, you can make a donation through PayPal. Donations are completely optional, but they're always appreciated and help keep the project going.
+
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-0070BA?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/donate/?hosted_button_id=PTAZ2DD7CTDVG)
+
+**Thank you for your support!**
+
+
 ## License
 
 MedChart is intended to be released under the **GNU General Public License v3.0 (GPL-3.0)**. See the repository's `LICENSE` file for the full terms.
