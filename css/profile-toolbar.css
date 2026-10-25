@@ -1,0 +1,14 @@
+.medchart-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:8px 0 14px}.medchart-toolbar button,.medchart-menu summary{cursor:pointer}.medchart-menu{position:relative}.medchart-menu summary{display:block;list-style:none;border:1px solid #70829b;border-radius:5px;background:#34465f;color:#fff;padding:10px 13px}.medchart-menu summary::-webkit-details-marker{display:none}.medchart-menu nav{position:absolute;z-index:200;top:calc(100% + 4px);left:0;min-width:220px;max-width:calc(100vw - 35px);padding:6px;background:#263343;color:#fff;border:1px solid #70829b;border-radius:6px;box-shadow:0 6px 20px #0005}.medchart-menu nav a,.medchart-menu nav button{display:block;box-sizing:border-box;width:100%;text-align:left;padding:10px 12px;color:#fff;background:transparent;border:0;border-radius:4px;text-decoration:none;font:inherit}.medchart-menu nav a:hover,.medchart-menu nav button:hover,.medchart-menu nav a:focus-visible,.medchart-menu nav button:focus-visible{background:#455b77}.medchart-toolbar #profile-save.profile-dirty{background:#b76b16;color:#fff;border-color:#b76b16}.medchart-toolbar #profile-save-status{font-size:.9rem}.medchart-toolbar #profile-save-status[data-state="dirty"]{color:#e6aa4b}.medchart-toolbar #profile-save-status[data-state="saved"]{color:#49b87a}.medchart-toolbar #profile-save-status[data-state="error"]{color:#e77a7a}@media(max-width:600px){.medchart-toolbar{gap:8px}.medchart-toolbar #profile-save-status{flex-basis:100%}.medchart-menu nav{left:auto;right:0}}
+
+/* High-visibility field-level status messages for profile changes. */
+.profile-field-status{display:none;margin:6px 0 12px;padding:9px 12px;border:2px solid currentColor;border-radius:5px;font-weight:700;font-size:1rem;line-height:1.45;max-width:580px;box-sizing:border-box}
+.profile-field-status[data-state="dirty"]{display:block;color:#7a4300;background:#fff0c2}
+.profile-field-status[data-state="saved"]{display:block;color:#155a30;background:#e0f5e6}
+.profile-field-status[data-state="error"]{display:block;color:#8c1521;background:#ffe1e3}
+html[data-medchart-theme="dark"] .profile-field-status[data-state="dirty"]{color:#ffe2a0;background:#49300c}
+html[data-medchart-theme="dark"] .profile-field-status[data-state="saved"]{color:#c4f4d2;background:#153b25}
+html[data-medchart-theme="dark"] .profile-field-status[data-state="error"]{color:#ffd2d7;background:#4a1921}
+
+/* Restore the Save action beneath Notes; both buttons share the same saveAll() handler. */
+.medchart-bottom-save{margin:4px 0 24px;display:flex;align-items:center;gap:10px}
+#profile-save-bottom.profile-dirty{background:#b76b16;color:#fff;border-color:#b76b16}

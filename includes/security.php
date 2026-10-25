@@ -29,8 +29,17 @@ function med_require_user($conn) {
             setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
         }
         session_destroy();
+        // Navigate normal pages to login; AJAX/API calls receive a 401 instead.
+        $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+        $isAjax = strpos($script, '/ajax/') !== false;
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET' && !$isAjax) {
+            $base = dirname($script);
+            if (basename($base) === 'admin') $base = dirname($base);
+            header('Location: ' . rtrim($base, '/') . '/login.php', true, 303);
+            exit;
+        }
         http_response_code(401);
-        exit('Session expired. Please log in again.');
+        exit('Authentication required');
     }
     if (empty($_SESSION['user_id'])) { http_response_code(401); exit('Authentication required'); }
     $id=(int)$_SESSION['user_id'];

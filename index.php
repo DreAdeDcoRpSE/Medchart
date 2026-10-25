@@ -42,6 +42,7 @@ if ($result && $result->num_rows > 0) {
         window.MEDCHART_CSRF = <?php echo json_encode(med_csrf()); ?>;
     </script>
     <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/profile-toolbar.css">
     <script src="js/theme.js"></script>
 </head>
 
@@ -56,18 +57,23 @@ if ($result && $result->num_rows > 0) {
         <!-- Mobile Scroll Helper (visible ≤768px) -->
         <div id="mobile-scroll-helper" aria-hidden="true"></div>
         <header>
-            <button onclick="saveAll()">Save</button>
-            <button onclick="window.open('print.php', '_blank')">Printer Friendly Version</button>
-            <button type="button" onclick="window.location.href='change_password.php'">Change Password</button>
-            <button type="button" onclick="window.location.href='transfer.php'">Import / Export</button>
-            <?php if (!empty($_SESSION['is_admin'])): ?>
-                <button type="button" onclick="window.location.href='admin/index.php'">Administration</button>
-            <?php endif; ?>
-            <button onclick="window.open('./logout.php', '_self')">Logout</button>
+            <div class="medchart-toolbar">
+                <button type="button" id="profile-save" onclick="saveAll()">Save</button>
+                <details class="medchart-menu"><summary aria-label="Open menu">☰ Menu</summary>
+                    <nav aria-label="MedChart actions">
+                        <a href="print.php" target="_blank" rel="noopener">Printer Friendly Version</a>
+                        <a href="change_password.php">Change Password</a>
+                        <a href="transfer.php">Import / Export</a>
+                        <?php if (!empty($_SESSION['is_admin'])): ?><a href="admin/index.php">Administration</a><?php endif; ?>
+                        <a href="logout.php">Logout</a>
+                    </nav>
+                </details>
+                
+            </div>
             <br>
             <h1>Medical Tracker</h1>
-            <label>Name: <input type="text" id="name" value="<?php echo htmlspecialchars($name); ?>"></label><br><br>
-            <label>DOB: <input type="date" id="dob" value="<?php echo htmlspecialchars($dob); ?>"></label><br><br>
+            <label>Name: <input type="text" id="name" value="<?php echo htmlspecialchars($name); ?>"></label><div id="profile-status-name" class="profile-field-status" role="status" aria-live="polite"></div><br><br>
+            <label>DOB: <input type="date" id="dob" value="<?php echo htmlspecialchars($dob); ?>"></label><div id="profile-status-dob" class="profile-field-status" role="status" aria-live="polite"></div><br><br>
         </header>
         <h2>Medications</h2>
         <div class="med-grid-header">
@@ -109,10 +115,12 @@ if ($result && $result->num_rows > 0) {
         <br><br>
 
         <h2>Notes</h2>
-        <textarea id="notes" rows="10" cols="80"><?php echo htmlspecialchars($notes); ?></textarea><br><br>
+        <textarea id="notes" rows="10" cols="80"><?php echo htmlspecialchars($notes); ?></textarea><div id="profile-status-notes" class="profile-field-status" role="status" aria-live="polite"></div><br><br>
 
-        <button onclick="saveAll()">Save</button>
-        <button onclick="window.open('print.php', '_blank')">Printer Friendly Version</button>
+
+        <div class="medchart-bottom-save">
+            <button type="button" id="profile-save-bottom" onclick="saveAll()">Save</button>
+        </div>
 
         <footer class="medchart-support-footer">
             <span>Enjoying MedChart? Support its development if you'd like.</span>
@@ -120,6 +128,7 @@ if ($result && $result->num_rows > 0) {
         </footer>
 
         <script src="js/script.js"></script>
+        <script src="js/profile-toolbar.js"></script>
         <script src="js/Sortable.min.js"></script>
     </div>
 </body>

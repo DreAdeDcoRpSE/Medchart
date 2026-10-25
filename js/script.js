@@ -11,20 +11,24 @@ window.fetch = function(resource, options = {}) {
     });
 };
 function saveAll() {
-    const dob = document.getElementById('dob').value;
-    const notes = document.getElementById('notes').value;
-    const name = document.getElementById('name').value;
-
+    const savedValues = window.medchartProfileSaveStarted ? window.medchartProfileSaveStarted() : [document.getElementById('name').value, document.getElementById('dob').value, document.getElementById('notes').value];
     const params = new URLSearchParams();
-    params.append('dob', dob);
-    params.append('notes', notes);
-    params.append('name', name);
-
-    fetch("ajax/save_medical_data.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    }).then(() => alert("Saved successfully"));
+    params.append('name', savedValues[0]);
+    params.append('dob', savedValues[1]);
+    params.append('notes', savedValues[2]);
+    fetch('ajax/save_medical_data.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+    }).then(response => {
+        if (!response.ok) throw new Error('Save failed (' + response.status + ')');
+        if (window.medchartProfileSaved) window.medchartProfileSaved(savedValues);
+        else alert('Saved successfully');
+    }).catch(error => {
+        if (window.medchartProfileSaveError) window.medchartProfileSaveError();
+        alert('Could not save your changes. Please try again.');
+        console.error(error);
+    });
 }
 
 window.onload = function () {
