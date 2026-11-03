@@ -6,7 +6,7 @@ MedChart is a self-hosted PHP/MySQL application designed to keep important medic
 
 It works in a web browser on a desktop, phone, or tablet. You can host it on a compatible web server or run it locally using a PHP environment such as WAMP.
 
-> **Project status:** Web version available. A standalone desktop version is something I would like to build in the future; it is not included in this release.
+> **Standalone version:**  -  A standalone Windows desktop version is available now: [Download Here](https://github.com/DreAdeDcoRpSE/Medchart_Portable/)
 
 ## Why I made MedChart
 
