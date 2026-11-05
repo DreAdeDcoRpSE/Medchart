@@ -58,7 +58,6 @@ if ($result && $result->num_rows > 0) {
         <div id="mobile-scroll-helper" aria-hidden="true"></div>
         <header>
             <div class="medchart-toolbar">
-                <button type="button" id="profile-save" onclick="saveAll()">Save</button>
                 <details class="medchart-menu"><summary aria-label="Open menu">☰ Menu</summary>
                     <nav aria-label="MedChart actions">
                         <a href="print.php" target="_blank" rel="noopener">Printer Friendly Version</a>
@@ -68,7 +67,7 @@ if ($result && $result->num_rows > 0) {
                         <a href="logout.php">Logout</a>
                     </nav>
                 </details>
-                
+                <button type="button" id="profile-save" onclick="saveAll()">Save</button>
             </div>
             <br>
             <h1>Medical Tracker</h1>
